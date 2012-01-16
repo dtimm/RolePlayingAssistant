@@ -1,0 +1,4 @@
+- Referencia de itens, nunca "iguais".
+- Software que ajude o jogador em um sistema complicado (GURPS, RoleMaster, ...)
+- Introduzir também Storytaller (Vampire) e D&D
+- Interface para escolher pessoas para rolar os dados em particular.
