@@ -1,11 +1,14 @@
 package com.oogzy.rpg.gurps.combat;
 
+import org.apache.log4j.Logger;
 import org.junit.Test;
 
 import com.oogzy.rpg.gurps.character.Character;
 
 public class CombatTest
 {
+	static Logger logger = Logger.getLogger(CombatTest.class);
+
 	@Test
 	public void test_combat_1()
 	{
@@ -24,7 +27,7 @@ public class CombatTest
 		if (Combat.attack(char1, char2))
 		{
 			int dmg = char1.getDamage().roll();
-			System.out.println(char1.getName() + " damages " + dmg + " points on " + char2.getName());
+			logger.debug(char1.getName() + " damages " + dmg + " points on " + char2.getName());
 			char2.damage(dmg);
 		}
 	}
@@ -57,7 +60,7 @@ public class CombatTest
 
 		for (Character c : combat.getTurns())
 		{
-			System.out.println(c.getName() + " > Speed:" + c.getSpeed());
+			logger.debug(c.getName() + " > Speed:" + c.getSpeed());
 		}
 	}
 
@@ -89,7 +92,7 @@ public class CombatTest
 
 		for (Character c : combat.getTurns())
 		{
-			System.out.println(c.getName() + " > Speed:" + c.getSpeed());
+			logger.debug(c.getName() + " > Speed:" + c.getSpeed());
 		}
 	}
 }

@@ -1,10 +1,15 @@
 package com.oogzy.rpg.gurps.combat;
 
+import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Logger;
+
 import com.oogzy.rpg.Dice;
 import com.oogzy.rpg.gurps.character.Character;
 
 public class Combat
 {
+	static Logger logger = Logger.getLogger(Combat.class);
+
 	private int currentTurn;
 
 	private Character[] turns;
@@ -19,53 +24,54 @@ public class Combat
 
 	public static boolean attack(Character attacker, Character defender)
 	{
-		System.out.println("-- Attack test --");
+		BasicConfigurator.configure();
+		logger.info("-- Attack test --");
 
 		int dAtk = Dice.roll(6, 3);
-		System.out.println("Attacker " + attacker.getName() + " rolls " + dAtk);
+		logger.debug("Attacker " + attacker.getName() + " rolls " + dAtk);
 
 		if (dAtk >= 17)
 		{
-			System.out.println(attacker.getName() + " automatic misses the attack...");
+			logger.debug(attacker.getName() + " automatic misses the attack...");
 			return false;
 		}
 
 		int attackSkill = attacker.getAttackSkill();
-		System.out.println("Attack skill points: " + attackSkill);
+		logger.debug("Attack skill points: " + attackSkill);
 
 		if (dAtk > attackSkill)
 		{
-			System.out.println(attacker.getName() + " misses the attack...");
+			logger.debug(attacker.getName() + " misses the attack...");
 			return false;
 		}
 
-		System.out.println(attacker.getName() + " got the attack...");
+		logger.debug(attacker.getName() + " got the attack...");
 		if (defend(defender, attacker))
 		{
 			return false;
 		}
 
-		System.out.println(attacker.getName() + " hits " + defender.getName() + ".");
+		logger.debug(attacker.getName() + " hits " + defender.getName() + ".");
 		return true;
 	}
 
 	public static boolean defend(Character defender, Character attacker)
 	{
-		System.out.println("-- Defense test --");
+		logger.info("-- Defense test --");
 
 		int dDef = Dice.roll(6, 3);
-		System.out.println("Defender " + defender.getName() + " rolls " + dDef);
+		logger.debug("Defender " + defender.getName() + " rolls " + dDef);
 
 		int totalDefense = defender.getTotalDefense();
-		System.out.println("Total defense: " + totalDefense);
+		logger.debug("Total defense: " + totalDefense);
 
 		if (dDef <= totalDefense)
 		{
-			System.out.println(defender.getName() + " defend the attack.");
+			logger.debug(defender.getName() + " defend the attack.");
 			return true;
 		}
 
-		System.out.println(defender.getName() + " fails on defense.");
+		logger.debug(defender.getName() + " fails on defense.");
 		return false;
 	}
 
